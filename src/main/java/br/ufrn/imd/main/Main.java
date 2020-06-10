@@ -1,5 +1,6 @@
 package br.ufrn.imd.main;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import br.ufrn.imd.core.Dataset;
@@ -17,7 +18,7 @@ public class Main {
 	public static ArrayList<Dataset> datasets;
 	public static ArrayList<String> trainTestproportion;
 
-	public static int numIterations = 10;
+	public static int numIterations;
 
 	public static Dataset trainDataset;
 	public static Dataset testDataset;
@@ -25,6 +26,7 @@ public class Main {
 	public static String inputPath = "src/main/resources/datasets/";
 	public static String outputPath = "src/main/resources/results/";
 	public static FileOutputWriter writer;
+	public static FileOutputWriter summarizer;
 
 	public static ExecutionResult execRes;
 
@@ -43,23 +45,27 @@ public class Main {
 		populateDatasets();
 		populateTrainTestValues();
 
+		numIterations = seeds.size();
 		int trainPercent = 0;
 		int testPercent = 0;
-
+		IterationResult iterRes;
+		
+		summarizer = new FileOutputWriter(outputPath+"ROC_geral");
+		
 		for (ArrayList<String> group : groups) {
 			for (String trainTestP : trainTestproportion) {
 				trainPercent = Integer.valueOf(trainTestP.substring(0, 2));
 				testPercent = Integer.valueOf(trainTestP.substring(3, 5));
 
-				for (int i = 0; i < numIterations; i++) {
+				for (int i = 0; i < group.size(); i++) {
 					Dataset trainTemp = new Dataset(buildDataset(group.get(i)));
-					for (int j = 0; j < numIterations; j++) {
+					for (int j = 0; j < group.size(); j++) {
 						Dataset testTemp = new Dataset(buildDataset(group.get(j)));
 
 						execRes = new ExecutionResult(numIterations, trainTemp.getDatasetName(), testTemp.getDatasetName());
-						IterationResult iterRes = new IterationResult();
-
+						
 						for (Integer seed : seeds) {
+							iterRes = new IterationResult();
 							trainDataset = Dataset.getSubsetFromDataset(trainTemp, trainPercent, seed);
 							testDataset = Dataset.getSubsetFromDataset(testTemp, testPercent, seed);
 
@@ -74,14 +80,15 @@ public class Main {
 							putResultsInIterationResult(measures, iterRes);
 							execRes.addIterationResult(iterRes);
 						}
-						writer = new FileOutputWriter(buildFileName(execRes));
-						writer.addContentline(execRes.getFinalResult());
-						System.out.println(execRes.getFinalResult());
+						saveExecutionResultOnFile(writer);
+						summarizer.addContentline(buildResultLineForSummary(execRes));
 					}
 				}
-
 			}
+			summarizer.addContentline("\n\n");
 		}
+		summarizer.writeInFile();
+		summarizer.saveAndClose();
 	}
 
 	public static void configureClassifier() {
@@ -98,9 +105,102 @@ public class Main {
 
 		ArrayList<String> groupAdm = new ArrayList<String>();
 		groupAdm.add("ADM1.csv.arff");
+		groupAdm.add("ADM2.csv.arff");
+		groupAdm.add("ADMFIN1.csv.arff");
+		groupAdm.add("AUDADM.csv.arff");
+		groupAdm.add("DIRPER1.csv.arff");
+		groupAdm.add("DIRPER2.csv.arff");
+		groupAdm.add("MAREM2.csv.arff");
+		groupAdm.add("PROINV1.csv.arff");
+		groupAdm.add("PROINV2.csv.arff");
+		groupAdm.add("TOMDES1.csv.arff");
 
+		ArrayList<String> groupContab = new ArrayList<String>();
+		groupContab.add("CONTA1.csv.arff");
+		groupContab.add("CONTA2.csv.arff");
+		groupContab.add("CONTA3.csv.arff");
+		groupContab.add("CONTAGUB.csv.arff");
+		groupContab.add("CONTASOC.csv.arff");
+		groupContab.add("CONTASUP1.csv.arff");
+		groupContab.add("CONTASUP2.csv.arff");
+		groupContab.add("ECONO.csv.arff");
+		groupContab.add("PERCONT.csv.arff");
+		groupContab.add("PROYPRE.csv.arff");
+
+		ArrayList<String> groupDir = new ArrayList<String>();
+		groupDir.add("DERCON.csv.arff");
+		groupDir.add("DERPEN.csv.arff");
+		groupDir.add("DERPER.csv.arff");
+		groupDir.add("DERPROCO.csv.arff");
+		groupDir.add("DERTRI2.csv.arff");
+		groupDir.add("ETIPRO.csv.arff");
+		groupDir.add("PROEJE.csv.arff");
+		groupDir.add("SOCJUR.csv.arff");
+
+		ArrayList<String> groupEngSist = new ArrayList<String>();
+		groupEngSist.add("FUNRED.csv.arff");
+		groupEngSist.add("GESERP.csv.arff");
+		groupEngSist.add("ININSI.csv.arff");
+		groupEngSist.add("INSOFT1.csv.arff");
+		groupEngSist.add("PROVIS2.csv.arff");
+		groupEngSist.add("TECPRO.csv.arff");
+		groupEngSist.add("TECSEG.csv.arff");
+		
 		groups.add(groupAdm);
+		groups.add(groupContab);
+		groups.add(groupDir);
+		groups.add(groupEngSist);
 
+	}
+	
+	public static void populateDatasets2() {
+
+		ArrayList<String> group0Ati = new ArrayList<String>();
+		group0Ati.add("DERCON.csv.arff");
+		group0Ati.add("DERPROCO.csv.arff");
+		group0Ati.add("DERTRI2.csv.arff");
+		group0Ati.add("FUNRED.csv.arff");
+		group0Ati.add("GESERP.csv.arff");
+		group0Ati.add("ININSI.csv.arff");
+		group0Ati.add("INSOFT1.csv.arff");
+		group0Ati.add("PROVIS2.csv.arff");
+		group0Ati.add("TECPRO.csv.arff");
+		group0Ati.add("TECSEG.csv.arff");
+
+		ArrayList<String> group1Ati = new ArrayList<String>();
+		group1Ati.add("ADM1.csv.arff");
+		group1Ati.add("ADM2.csv.arff");
+		group1Ati.add("ADMFIN1.csv.arff");
+		group1Ati.add("AUDADM.csv.arff");
+		group1Ati.add("CONTA1.csv.arff");
+		group1Ati.add("CONTA2.csv.arff");
+		group1Ati.add("CONTASOC.csv.arff");
+		group1Ati.add("CONTASUP2.csv.arff");
+		group1Ati.add("DERPEN.csv.arff");
+		group1Ati.add("DERPER.csv.arff");
+        group1Ati.add("ETIPRO.csv.arff");
+        group1Ati.add("PERCONT.csv.arff");
+        group1Ati.add("PROEJE.csv.arff");
+        group1Ati.add("PROINV1.csv.arff");
+        group1Ati.add("PROINV2.csv.arff");
+        group1Ati.add("PROYPRE.csv.arff");
+        group1Ati.add("SOCJUR.csv.arff");
+
+		ArrayList<String> group2Ati = new ArrayList<String>();
+		group2Ati.add("CONTA3.csv.arff");
+		group2Ati.add("CONTAGUB.csv.arff");
+		group2Ati.add("CONTASUP1.csv.arff");
+		group2Ati.add("DIRPER1.csv.arff");
+		group2Ati.add("DIRPER2.csv.arff");
+		group2Ati.add("ECONO.csv.arff");
+		group2Ati.add("MAREM2.csv.arff");
+		group2Ati.add("TOMDES1.csv.arff");
+
+		
+		groups.add(group0Ati);
+		groups.add(group1Ati);
+		groups.add(group2Ati);
+		
 	}
 
 	public static void populateSeeds() {
@@ -133,23 +233,44 @@ public class Main {
 	}
 
 	public static void putResultsInIterationResult(Measures measures, IterationResult iterResult) {
-
 		iterResult.setAccuracy(measures.getAccuracy());
 		iterResult.setError(measures.getError());
 		iterResult.setfMeasure(measures.getFmeasureMean());
 		iterResult.setPrecision(measures.getPrecisionMean());
 		iterResult.setRecall(measures.getRecallMean());
 		iterResult.setRoc(measures.getRoc());
-
 	}
 
 	public static String buildFileName(ExecutionResult execRes) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(outputPath);
+		sb.append(execRes.getTrainDataset());
+		sb.append("_");
+		sb.append(execRes.getTestDataset());
+		sb.append("_");
+		sb.append(execRes.getResults().get(0).getTrainTestProportion());
+		return sb.toString();
+	}
+	
+	public static void saveExecutionResultOnFile(FileOutputWriter writer) throws IOException {
+		writer = new FileOutputWriter(buildFileName(execRes));
+		writer.addContentline(execRes.getFinalResult());
+		writer.writeInFile();
+		writer.saveAndClose();
+	}
+
+	public static String buildResultLineForSummary(ExecutionResult exec) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(execRes.getTrainDataset());
 		sb.append("_");
 		sb.append(execRes.getTestDataset());
 		sb.append("_");
-		sb.append(execRes.getResults().get(0));
+		sb.append(execRes.getResults().get(0).getTrainTestProportion());
+		sb.append("\t");
+		sb.append(exec.getRocValues());
+		
 		return sb.toString();
 	}
 }
+
+

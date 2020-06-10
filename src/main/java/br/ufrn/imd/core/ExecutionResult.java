@@ -3,6 +3,7 @@ package br.ufrn.imd.core;
 import java.util.ArrayList;
 
 import br.ufrn.imd.utils.DateUtils;
+import br.ufrn.imd.utils.NumberUtils;
 
 public class ExecutionResult {
 
@@ -140,7 +141,7 @@ public class ExecutionResult {
 		sb.append("------------------------------------------------------------------------------------------------");
 		sb.append("\n");
 		sb.append("@TRAIN-DATASET: " + trainDataset + "\n");
-		sb.append("@TR-DATASET: " + trainDataset + "\n");
+		sb.append("@TEST-DATASET: " + trainDataset + "\n");
 		sb.append("@Iterations  : " + numIterations + "\n");
 		sb.append("@Seeds for each execution: " + buildSeedsStringFromResults() + "\n");
 		sb.append("@TrainAndTestProportion for each execution: " + buildTrainTestStringFromResults() + "\n");
@@ -218,4 +219,14 @@ public class ExecutionResult {
 		return sBuilder.toString();
 	}
 
+	public String getRocValues() {
+		StringBuilder sb = new StringBuilder();
+		
+		for(IterationResult result: this.results) {
+			sb.append(NumberUtils.formatValue(result.getRoc()) + "\t");
+		}
+		sb.append("| " + NumberUtils.formatValue(this.averageResult.getRoc()));
+		return sb.toString();
+	}
+	
 }

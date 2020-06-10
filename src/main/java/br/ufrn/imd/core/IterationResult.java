@@ -1,5 +1,7 @@
 package br.ufrn.imd.core;
 
+import br.ufrn.imd.utils.NumberUtils;
+
 public class IterationResult {
 
 	private double accuracy;
@@ -96,24 +98,14 @@ public class IterationResult {
 	public String onlyValuesToString() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append(formatValue(accuracy) + "\t\t");
-		sb.append(formatValue(error) + "\t\t");
-		sb.append(formatValue(fMeasure) + "\t\t");
-		sb.append(formatValue(precision) + "\t\t");
-		sb.append(formatValue(recall) + "\t\t");
-		sb.append(formatValue(roc) + "\t\t");
+		sb.append(NumberUtils.formatValue(accuracy) + "\t\t");
+		sb.append(NumberUtils.formatValue(error) + "\t\t");
+		sb.append(NumberUtils.formatValue(fMeasure) + "\t\t");
+		sb.append(NumberUtils.formatValue(precision) + "\t\t");
+		sb.append(NumberUtils.formatValue(recall) + "\t\t");
+		sb.append(NumberUtils.formatValue(roc) + "\t\t");
 
 		return sb.toString();
-	}
-
-	private String formatValue(Double value) {
-		String s;
-		if (value < 100) {
-			s = String.format("%.4f", value);
-		} else {
-			s = String.format("%.3f", value);
-		}
-		return s;
 	}
 
 }
