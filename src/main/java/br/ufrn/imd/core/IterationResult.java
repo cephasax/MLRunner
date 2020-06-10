@@ -9,7 +9,20 @@ public class IterationResult {
 	private double recall;
 	private double roc;
 	
+	private Integer seed;
+	private String trainTestProportion;
+	
 	public IterationResult() {
+		
+	}
+	
+	/**
+	 * @param seed
+	 * @param traingTestProportion train and test with format "70-30" (example)
+	 */
+	public IterationResult(Integer seed, String trainTestPorportion) {
+		this.seed = seed;
+		this.trainTestProportion = new String(trainTestProportion);
 	}
 
 	public double getAccuracy() {
@@ -58,6 +71,26 @@ public class IterationResult {
 
 	public void setRoc(double roc) {
 		this.roc = roc;
+	}
+
+	public Integer getSeed() {
+		return seed;
+	}
+
+	public void setSeed(Integer seed) {
+		this.seed = seed;
+	}
+
+	public String getTrainTestProportion() {
+		return trainTestProportion;
+	}
+
+	/**
+	 * 
+	 * @param traingTestProportion train and test with format "70-30" (example)
+	 */
+	public void setTrainTestProportion(String trainTestProportion) {
+		this.trainTestProportion = new String(trainTestProportion);
 	}
 
 	public String onlyValuesToString() {

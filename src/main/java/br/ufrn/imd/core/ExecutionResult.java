@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import br.ufrn.imd.utils.DateUtils;
 
-
 public class ExecutionResult {
 
 	private int numIterations;
@@ -14,6 +13,8 @@ public class ExecutionResult {
 	private IterationResult averageResult;
 	private long begin;
 	private long end;
+	
+	private String finalResult;
 
 	public ExecutionResult(int numIterations, String trainDataset, String testDataset) {
 		this.numIterations = numIterations;
@@ -22,32 +23,31 @@ public class ExecutionResult {
 		this.results = new ArrayList<IterationResult>();
 		this.averageResult = new IterationResult();
 	}
-	
+
 	public void addIterationResult(IterationResult result) {
-		
-		if(results.size() < numIterations) {
+
+		if (results.size() < numIterations) {
 			this.results.add(result);
-			if(results.size() == numIterations) {
+			if (results.size() == numIterations) {
 				calcAverageResult();
 			}
-		}
-		else {
+		} else {
 			System.out.println("result from this execution is already full");
 		}
 	}
-	
+
 	public void calcAverageResult() {
-		
+
 		int num = results.size();
-		
+
 		double accuracy = 0.0;
 		double error = 0.0;
 		double fMeasure = 0.0;
 		double precision = 0.0;
 		double recall = 0.0;
 		double roc = 0.0;
-				
-		for(IterationResult ir: results) {
+
+		for (IterationResult ir : results) {
 			accuracy += ir.getAccuracy();
 			error += ir.getError();
 			fMeasure += ir.getfMeasure();
@@ -55,7 +55,7 @@ public class ExecutionResult {
 			recall += ir.getRecall();
 			roc += ir.getRoc();
 		}
-		
+
 		averageResult.setAccuracy(accuracy / num);
 		averageResult.setError(error / num);
 		averageResult.setfMeasure(fMeasure / num);
@@ -63,11 +63,11 @@ public class ExecutionResult {
 		averageResult.setRecall(recall / num);
 		averageResult.setRoc(roc / num);
 	}
-	
+
 	public long getTimeElapsed() {
 		return this.end - this.begin;
 	}
-	
+
 	public int getNumIterations() {
 		return numIterations;
 	}
@@ -107,7 +107,7 @@ public class ExecutionResult {
 	public void setAverageResult(IterationResult averageResult) {
 		this.averageResult = averageResult;
 	}
-	
+
 	public long getBegin() {
 		return begin;
 	}
@@ -125,13 +125,16 @@ public class ExecutionResult {
 	}
 
 	public void showResult() {
-		System.out.println(buildResultString());
+		System.out.println(getFinalResult());
 	}
 
-	public String getResult() {
-		return buildResultString();
+	public String getFinalResult() {
+		if (this.finalResult == null) {
+			buildResultString();
+		}
+		return this.finalResult;
 	}
-	
+
 	private String buildMetrics() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("------------------------------------------------------------------------------------------------");
@@ -139,6 +142,8 @@ public class ExecutionResult {
 		sb.append("@TRAIN-DATASET: " + trainDataset + "\n");
 		sb.append("@TR-DATASET: " + trainDataset + "\n");
 		sb.append("@Iterations  : " + numIterations + "\n");
+		sb.append("@Seeds for each execution: " + buildSeedsStringFromResults() + "\n");
+		sb.append("@TrainAndTestProportion for each execution: " + buildTrainTestStringFromResults() + "\n");
 		sb.append("------------------------------------------------------------------------------------------------");
 		sb.append("\n\t\t");
 		sb.append("accura" + "\t\t");
@@ -147,23 +152,23 @@ public class ExecutionResult {
 		sb.append("precis" + "\t\t");
 		sb.append("recall" + "\t\t");
 		sb.append("ROC" + "\t\t\n");
-		
+
 		sb.append("------------------------------------------------------------------------------------------------");
 		sb.append("\n");
-		for(int i = 0; i < results.size();i++) {
-			sb.append("fold" + (i+1) + ":\t\t");
-			sb.append(results.get(i).onlyValuesToString() +"\n");
+		for (int i = 0; i < results.size(); i++) {
+			sb.append("fold" + (i + 1) + ":\t\t");
+			sb.append(results.get(i).onlyValuesToString() + "\n");
 		}
 		sb.append("\n");
 		sb.append("------------------------------------------------------------------------------------------------");
 		sb.append("\n");
 		sb.append("AVERAG" + "\t\t");
-		sb.append(averageResult.onlyValuesToString() +"\n");
+		sb.append(averageResult.onlyValuesToString() + "\n");
 		sb.append("------------------------------------------------------------------------------------------------");
 		sb.append("\n");
 		return sb.toString();
 	}
-	
+
 	private String buildTime() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("------------------------------------------------------------------------------------------------");
@@ -177,14 +182,40 @@ public class ExecutionResult {
 		sb.append("\n");
 		sb.append("------------------------------------------------------------------------------------------------");
 		sb.append("\n");
-		return sb.toString(); 
+		return sb.toString();
 	}
-	
-	private String buildResultString() {
+
+	private void buildResultString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(buildMetrics());
 		sb.append(buildTime());
-		return sb.toString();
+		this.finalResult = new String(sb.toString());
 	}
-	
+
+	private String buildSeedsStringFromResults() {
+		StringBuilder sBuilder = new StringBuilder();
+		sBuilder.append("[ ");
+		for (int i = 0; i < results.size(); i++) {
+			if (i < results.size() - 1) {
+				sBuilder.append(results.get(i).getSeed() + " ; ");
+			} else {
+				sBuilder.append(results.get(i).getSeed() + " ]");
+			}
+		}
+		return sBuilder.toString();
+	}
+
+	private String buildTrainTestStringFromResults() {
+		StringBuilder sBuilder = new StringBuilder();
+		sBuilder.append("[ ");
+		for (int i = 0; i < results.size(); i++) {
+			if (i < results.size() - 1) {
+				sBuilder.append(results.get(i).getTrainTestProportion() + " ; ");
+			} else {
+				sBuilder.append(results.get(i).getTrainTestProportion() + " ]");
+			}
+		}
+		return sBuilder.toString();
+	}
+
 }
