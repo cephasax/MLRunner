@@ -1,4 +1,4 @@
-@relation ADM2-weka.filters.unsupervised.attribute.Remove-R1
+@relation ADM2
 
 @attribute at1 numeric
 @attribute at2 numeric

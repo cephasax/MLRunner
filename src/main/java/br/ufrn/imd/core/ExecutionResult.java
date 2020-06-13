@@ -140,9 +140,9 @@ public class ExecutionResult {
 		StringBuilder sb = new StringBuilder();
 		sb.append("------------------------------------------------------------------------------------------------");
 		sb.append("\n");
-		sb.append("@TRAIN-DATASET: " + trainDataset + "\n");
-		sb.append("@TEST-DATASET: " + trainDataset + "\n");
-		sb.append("@Iterations  : " + numIterations + "\n");
+		sb.append("@TRAIN-DATASET: " + this.trainDataset + "\n");
+		sb.append("@TEST-DATASET: " + this.testDataset + "\n");
+		sb.append("@Iterations  : " + this.numIterations + "\n");
 		sb.append("@Seeds for each execution: " + buildSeedsStringFromResults() + "\n");
 		sb.append("@TrainAndTestProportion for each execution: " + buildTrainTestStringFromResults() + "\n");
 		sb.append("------------------------------------------------------------------------------------------------");
