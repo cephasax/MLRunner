@@ -229,4 +229,14 @@ public class ExecutionResult {
 		return sb.toString();
 	}
 	
+	public String getPrecisionValues() {
+		StringBuilder sb = new StringBuilder();
+		
+		for(IterationResult result: this.results) {
+			sb.append(NumberUtils.formatValue(result.getPrecision()) + "\t");
+		}
+		sb.append("| " + NumberUtils.formatValue(this.averageResult.getPrecision()));
+		return sb.toString();
+	}
+	
 }

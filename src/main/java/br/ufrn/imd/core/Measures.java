@@ -42,7 +42,7 @@ public class Measures implements Serializable {
 		fmeasure = new double[numClasses];
 		accuracy = eval.pctCorrect();
 		error = eval.pctIncorrect();
-		roc = eval.weightedAreaUnderROC();
+		roc = correctValue(eval.weightedAreaUnderROC());
 		
 		classesDistribution = eval.getClassPriors();
 		for (int i = 0; i < numClasses; i++) {
