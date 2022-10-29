@@ -239,4 +239,21 @@ public class ExecutionResult {
 		return sb.toString();
 	}
 	
+	public String getAccuracyValuesAsString() {
+		StringBuilder sb = new StringBuilder();
+		
+		for(IterationResult result: this.results) {
+			sb.append(NumberUtils.formatValue(result.getAccuracy()) + ";");
+		}
+		return sb.toString();
+	}
+	
+	public String getFmeasureValuesAsString() {
+		StringBuilder sb = new StringBuilder();
+		
+		for(IterationResult result: this.results) {
+			sb.append(NumberUtils.formatValue(result.getfMeasure()) + ";");
+		}
+		return sb.toString();
+	}
 }

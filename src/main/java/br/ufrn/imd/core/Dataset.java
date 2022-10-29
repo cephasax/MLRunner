@@ -8,6 +8,7 @@ import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
 import weka.filters.supervised.instance.Resample;
+import weka.filters.unsupervised.instance.Randomize;
 
 public class Dataset {
 
