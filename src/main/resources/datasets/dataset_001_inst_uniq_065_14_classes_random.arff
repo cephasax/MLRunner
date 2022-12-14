@@ -1,0 +1,94 @@
+@relation dataset_001_uniq_65_inst_random
+
+@attribute esfera {municipal,estadual,federal}
+@attribute vagas_nivel_fundamental {1,0}
+@attribute vagas_nivel_medio {1,0}
+@attribute vagas_nivel_superior {1,0}
+@attribute vagas_ciencias_exatas_terra {1,0}
+@attribute vagas_ciencias_biologicas {1,0}
+@attribute vagas_engenharias {1,0}
+@attribute vagas_ciencias_saude {1,0}
+@attribute vagas_ciencias_agrarias {1,0}
+@attribute vagas_ciencias_sociais {1,0}
+@attribute vagas_ciencias_humanas {1,0}
+@attribute vagas_lingui_letras_artes {1,0}
+@attribute outros {1,0}
+@attribute has_isencao {1,0}
+@attribute has_reserva_deficiente {1,0}
+@attribute has_reserva_pnp {1,0}
+@attribute tipo_processo_avaliativo {curso_tecnico,residencia,pos_graduacao,graduacao,proficiencia,concurso_publico,reopcao}
+@attribute taxa_inscricao numeric
+@attribute varios_locais_prova {1,0}
+@attribute tipo_cobranca {gru_cobranca,gru_simples}
+@attribute reserva_grupos_l {1,0}
+@attribute nota_titulos {1,0}
+@attribute analise_curricular {1,0}
+@attribute has_redacao {1,0}
+@attribute has_reserva_servidores {1,0}
+@attribute class {faixa_10,faixa_100,faixa_500,faixa_1000,faixa_1700,faixa_2500,faixa_3500,faixa_5000,faixa_7000,faixa_10000,faixa_15000,faixa_20000,faixa_25000,faixa_30000}
+
+@data
+federal,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,residencia,1,0,gru_cobranca,0,0,1,0,0,faixa_500
+municipal,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,concurso_publico,0.5299,0,gru_cobranca,0,0,0,0,0,faixa_5000
+municipal,0,1,1,1,0,1,1,0,1,1,0,0,0,1,0,concurso_publico,0.5382,0,gru_cobranca,0,0,0,0,0,faixa_7000
+federal,0,1,0,1,0,0,0,0,0,0,0,0,1,0,0,curso_tecnico,0.1667,1,gru_simples,1,0,0,0,0,faixa_3500
+federal,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,concurso_publico,0,0,gru_simples,1,0,0,1,0,faixa_100
+federal,0,1,0,1,0,0,0,0,0,0,0,0,1,1,0,curso_tecnico,0.1667,1,gru_simples,1,0,0,0,0,faixa_5000
+estadual,0,0,1,0,0,0,0,0,1,0,0,0,1,1,0,pos_graduacao,0.4167,0,gru_cobranca,0,0,0,0,0,faixa_100
+municipal,0,1,1,0,1,0,1,0,1,1,0,1,1,0,1,concurso_publico,0.5367,0,gru_cobranca,0,1,0,0,0,faixa_30000
+municipal,1,1,1,0,1,1,1,0,1,1,0,1,0,1,0,concurso_publico,0.5079,0,gru_cobranca,0,0,0,0,0,faixa_15000
+federal,0,0,1,1,1,1,1,1,1,1,1,0,1,0,0,graduacao,0.1667,0,gru_simples,0,1,0,0,0,faixa_1000
+federal,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,residencia,1,1,gru_cobranca,0,1,1,0,0,faixa_1000
+municipal,0,1,1,0,1,0,1,0,1,1,0,1,1,0,1,concurso_publico,0.5367,0,gru_cobranca,0,0,0,0,0,faixa_10
+federal,0,1,1,1,0,0,0,0,1,0,1,1,1,1,1,concurso_publico,0.3407,0,gru_cobranca,0,0,0,1,0,faixa_1700
+federal,0,1,0,1,0,0,0,1,0,0,0,1,1,0,0,curso_tecnico,0.1667,1,gru_simples,1,0,0,0,0,faixa_1000
+federal,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,curso_tecnico,0,0,gru_simples,1,0,0,0,0,faixa_10
+federal,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,pos_graduacao,0.5,1,gru_cobranca,0,0,0,1,0,faixa_7000
+federal,0,1,0,1,0,0,0,1,0,0,0,0,1,1,0,curso_tecnico,0.1667,1,gru_simples,1,0,0,0,0,faixa_1700
+federal,0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,curso_tecnico,0.1667,0,gru_simples,1,0,0,0,0,faixa_100
+federal,0,0,1,1,1,1,1,1,1,1,1,0,1,0,0,graduacao,0.1667,1,gru_simples,0,1,0,1,0,faixa_7000
+federal,0,1,0,0,0,0,1,0,0,0,0,1,1,0,0,curso_tecnico,0.1667,0,gru_simples,1,0,0,0,0,faixa_5000
+federal,0,1,0,1,0,0,0,0,0,0,0,0,1,1,0,curso_tecnico,0.1667,1,gru_simples,1,0,0,0,0,faixa_100
+federal,0,1,0,1,0,0,1,0,0,0,0,0,1,1,0,curso_tecnico,0.1667,0,gru_simples,1,0,0,0,0,faixa_7000
+federal,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,pos_graduacao,0.9167,0,gru_cobranca,0,0,0,0,1,faixa_500
+federal,0,0,1,0,0,0,0,0,0,0,0,1,1,1,0,proficiencia,0.2778,0,gru_cobranca,0,0,0,0,1,faixa_1700
+federal,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,residencia,1,0,gru_cobranca,0,1,1,0,0,faixa_10
+federal,0,0,1,0,0,0,0,0,0,1,0,0,1,0,0,pos_graduacao,0.8889,0,gru_cobranca,0,0,0,0,1,faixa_100
+municipal,0,1,1,1,0,0,1,0,1,1,0,1,1,0,0,concurso_publico,0.5158,0,gru_cobranca,0,1,0,0,0,faixa_30000
+federal,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,curso_tecnico,0.1667,0,gru_simples,0,0,0,0,0,faixa_1700
+federal,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,pos_graduacao,0.2778,1,gru_cobranca,0,0,0,1,0,faixa_10000
+federal,0,1,1,1,0,1,1,1,1,0,0,1,0,1,0,curso_tecnico,0.2389,0,gru_simples,0,0,0,0,0,faixa_15000
+estadual,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,concurso_publico,0.6667,1,gru_cobranca,0,0,0,1,0,faixa_500
+federal,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,residencia,1,0,gru_cobranca,0,1,0,0,0,faixa_500
+federal,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,pos_graduacao,0.3889,1,gru_cobranca,0,0,0,1,0,faixa_7000
+federal,0,1,0,0,0,0,0,0,1,0,0,0,1,1,0,concurso_publico,0,1,gru_simples,1,0,0,0,0,faixa_3500
+federal,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,graduacao,0,0,gru_simples,1,0,0,1,0,faixa_500
+federal,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,graduacao,0,0,gru_simples,1,0,0,0,0,faixa_100
+federal,0,0,1,1,0,0,1,0,0,1,1,0,1,0,0,graduacao,0.1667,0,gru_simples,1,0,0,0,0,faixa_100
+federal,0,1,0,0,0,0,0,0,0,0,1,0,1,1,0,curso_tecnico,0.0833,0,gru_simples,1,0,0,0,0,faixa_100
+federal,0,1,0,0,0,0,1,0,0,0,0,1,1,1,0,curso_tecnico,0.1667,0,gru_simples,1,0,0,0,0,faixa_1700
+municipal,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,concurso_publico,0.4771,0,gru_cobranca,0,0,0,0,0,faixa_3500
+federal,0,1,1,1,1,0,1,0,1,1,0,1,1,0,1,concurso_publico,0.3918,1,gru_cobranca,0,0,0,1,0,faixa_15000
+federal,1,1,1,1,0,1,1,0,1,1,0,1,1,0,1,concurso_publico,0.4148,1,gru_cobranca,0,0,0,1,0,faixa_30000
+federal,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,residencia,1,0,gru_cobranca,0,0,1,0,0,faixa_1000
+municipal,1,1,1,1,1,0,1,0,0,1,1,1,0,1,0,concurso_publico,0.4815,0,gru_cobranca,0,0,0,0,0,faixa_3500
+federal,0,1,1,1,1,0,1,0,1,1,0,1,1,1,1,concurso_publico,0.3778,0,gru_cobranca,0,0,0,1,0,faixa_10000
+federal,0,0,1,0,0,0,1,0,0,0,0,0,1,1,0,residencia,1,1,gru_cobranca,0,0,1,0,0,faixa_2500
+federal,0,0,1,1,1,1,1,1,1,1,1,0,1,0,0,graduacao,0.1667,1,gru_simples,0,0,0,1,0,faixa_5000
+federal,0,1,0,1,0,0,0,1,0,0,0,0,1,0,0,curso_tecnico,0.1667,1,gru_simples,1,0,0,1,0,faixa_1700
+municipal,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,concurso_publico,0.4876,0,gru_cobranca,0,0,0,0,0,faixa_7000
+federal,0,1,0,1,0,0,0,1,0,0,0,0,1,1,0,curso_tecnico,0.1667,1,gru_simples,0,0,0,0,0,faixa_1000
+federal,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,concurso_publico,0.375,0,gru_simples,0,0,0,0,0,faixa_100
+federal,0,1,1,0,0,0,0,0,0,0,1,1,1,1,1,concurso_publico,0.3222,1,gru_cobranca,0,0,0,1,0,faixa_1000
+federal,0,1,0,0,0,0,0,0,1,0,0,0,0,1,0,concurso_publico,0,0,gru_simples,1,0,0,1,0,faixa_500
+federal,0,1,1,1,1,0,1,1,1,1,1,1,0,0,0,concurso_publico,0.2075,0,gru_simples,0,0,0,0,0,faixa_500
+municipal,0,1,1,1,1,0,0,0,0,1,1,1,1,1,0,concurso_publico,0.4386,1,gru_cobranca,0,1,1,0,0,faixa_30000
+federal,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,pos_graduacao,0.5278,0,gru_cobranca,0,0,0,1,0,faixa_100
+federal,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,residencia,1,0,gru_cobranca,0,0,1,0,0,faixa_10
+federal,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,residencia,1,0,gru_cobranca,0,0,1,0,0,faixa_500
+municipal,0,1,0,0,0,0,0,0,0,0,0,1,1,1,0,concurso_publico,0.2778,0,gru_cobranca,0,0,0,0,0,faixa_30000
+federal,1,1,1,1,1,0,1,0,1,1,1,1,0,1,0,concurso_publico,0.3826,1,gru_cobranca,0,1,0,0,0,faixa_30000
+federal,0,0,1,0,0,0,0,0,0,0,1,0,1,1,0,pos_graduacao,0.9722,0,gru_cobranca,0,0,0,0,0,faixa_500
+municipal,1,1,1,1,0,0,0,0,1,1,0,1,1,1,0,concurso_publico,0.5101,0,gru_cobranca,0,0,0,0,0,faixa_10000
+federal,0,0,1,1,0,0,1,0,0,1,1,0,1,0,0,graduacao,0.1667,0,gru_simples,1,0,0,0,0,faixa_2500
+federal,0,1,0,1,0,0,0,0,0,0,0,0,1,1,0,curso_tecnico,0,1,gru_simples,0,0,0,0,0,faixa_10000

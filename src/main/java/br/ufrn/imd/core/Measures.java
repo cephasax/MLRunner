@@ -58,10 +58,6 @@ public class Measures implements Serializable {
 			labels[i] = att.value(i);
 		}
 	}
-	
-	private double correctValue (double value) {
-		return Double.isNaN(value) ? 0 : value;
-	}
 
 	public double[] precision() {
 		return precision;
@@ -76,37 +72,73 @@ public class Measures implements Serializable {
 	}
 
 	public double getPrecisionMean() {
-		return average(precision);
+		return correctValue(average(precision));
 	}
 
 	public double getRecallMean() {
-		return average(recall);
+		return correctValue(average(recall));
 	}
 
 	public double getFmeasureMean() {
 		double pavg = getPrecisionMean();
 		double ravg = getRecallMean();
-		return fMeasure(pavg, ravg);
+		return correctValue(fMeasure(pavg, ravg));
 	}
 
 	public double getRoc() {
-		return roc;
+		return correctValue(roc);
 	}
 
 	public double precisionWeightedMean() {
-		return averageByDistribution(precision);
+		return correctValue(averageByDistribution(precision));
 	}
 
 	public double recallWeightedMean() {
-		return averageByDistribution(recall);
+		return correctValue(averageByDistribution(recall));
 	}
 
 	public double fMeasureWeightedMean() {
 		double pwavg = precisionWeightedMean();
 		double rwavg = recallWeightedMean();
-		return fMeasure(pwavg, rwavg);
+		return correctValue(fMeasure(pwavg, rwavg));
 	}
 
+	private double fMeasure(double precision, double recall) {
+		return (2.0 * (precision * recall)) / (precision + recall);
+	}
+
+	private double average(double[] values) {
+		double avg = 0;
+		for (double d : values) {
+			avg += d;
+		}
+		return avg / (double) values.length;
+	}
+
+	private double averageByDistribution(double[] values) {
+		double avg = 0;
+		for (int i = 0; i < values.length; i++) {
+			avg += values[i] * classesDistribution[i];
+		}
+		return avg;
+	}
+
+	public double getAccuracy() {
+		return correctValue(accuracy);
+	}
+
+	public void setAccuracy(double accuracy) {
+		this.accuracy = accuracy;
+	}
+
+	public double getError() {
+		return correctValue(error);
+	}
+
+	public void setError(double error) {
+		this.error = error;
+	}
+	
 	public String toSummary() {
 		int maxLength = 15;
 		for (String str : labels) {
@@ -133,42 +165,9 @@ public class Measures implements Serializable {
 
 		return str.toString();
 	}
-
-	private double fMeasure(double precision, double recall) {
-		return (2.0 * (precision * recall)) / (precision + recall);
-	}
-
-	private double average(double[] values) {
-		double avg = 0;
-		for (double d : values) {
-			avg += d;
-		}
-		return avg / (double) values.length;
-	}
-
-	private double averageByDistribution(double[] values) {
-		double avg = 0;
-		for (int i = 0; i < values.length; i++) {
-			avg += values[i] * classesDistribution[i];
-		}
-		return avg;
-	}
-
-	public double getAccuracy() {
-		return accuracy;
-	}
-
-	public void setAccuracy(double accuracy) {
-		this.accuracy = accuracy;
-	}
-
-	public double getError() {
-		return error;
-	}
-
-	public void setError(double error) {
-		this.error = error;
-	}
 	
+	private double correctValue (double value) {
+		return Double.isNaN(value) ? 0 : value;
+	}
 	
 }

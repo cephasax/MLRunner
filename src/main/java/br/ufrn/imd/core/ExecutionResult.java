@@ -143,10 +143,10 @@ public class ExecutionResult {
 		sb.append("@TRAIN-DATASET: " + this.trainDataset + "\n");
 		sb.append("@TEST-DATASET: " + this.testDataset + "\n");
 		sb.append("@Iterations  : " + this.numIterations + "\n");
-		sb.append("@Seeds for each execution: " + buildSeedsStringFromResults() + "\n");
-		sb.append("@TrainAndTestProportion for each execution: " + buildTrainTestStringFromResults() + "\n");
+		//sb.append("@Seeds for each execution: " + buildSeedsStringFromResults() + "\n");
+		//sb.append("@TrainAndTestProportion for each execution: " + buildTrainTestStringFromResults() + "\n");
 		sb.append("------------------------------------------------------------------------------------------------");
-		sb.append("\n\t\t");
+		sb.append("\n\t\t\t");
 		sb.append("accura" + "\t\t");
 		sb.append("error " + "\t\t");
 		sb.append("fmeasu" + "\t\t");
